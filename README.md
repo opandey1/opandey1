@@ -2,7 +2,7 @@
 
 ### Senior Detection Engineer · SIEM & Threat Hunting · Applied AI/ML & GenAI for the SOC
 
-I've spent the last decade in security operations — building detection content, hunting threats, and helping enterprises mature their SOCs at [Securonix](https://www.securonix.com/). I now work at the intersection of **detection engineering and applied AI**: writing ATT&CK-mapped detections, validating them against real adversary tooling, and building guardrailed LLM pipelines that cut triage time without cutting corners.
+I've spent the last decade in security operations — building detection content, hunting threats, and helping enterprises mature their SOCs at [Securonix](https://www.securonix.com/). I now work at the intersection of **detection engineering and applied AI**: writing ATT&CK-mapped detections, verifying them against simulated attacks, and building guardrailed LLM pipelines — then measuring honestly whether they actually help.
 
 If you're working on detection engineering, AI for security operations, or SOC automation — I'd love to talk.
 
@@ -10,19 +10,22 @@ If you're working on detection engineering, AI for security operations, or SOC a
 
 ## 🔭 What I'm working on
 
-- **[AlertMind](https://github.com/opandey1/alertmind)** — my capstone: a working mini-SOC with an LLM tier-1 triage assistant, measured for real impact (details below)
-- **LLM security & governance** — PII-masking LLM gateway design (regex → NER → local LLM) and evaluating LLM outputs against ground truth: IOC completeness, ATT&CK mapping accuracy, hallucination rate (ISO/IEC 42001-aligned)
+- **LLM security & governance** — PII-masking gateway design (regex → NER → local LLM), and evaluating LLM outputs against ground truth: grounding, unsupported statements, IOC completeness, ATT&CK accuracy, query validity and confidence calibration — informed by ISO/IEC 42001
 - **Applied ML for SOC operations** — explainable models for threat triage and agentic pipelines for ticket generation
 
 ## 🚀 Featured Projects
 
-**[AlertMind — AI-Assisted Mini SOC](https://github.com/opandey1/alertmind)** 🛡️ *(active capstone)*
-A working Security Operations Centre built end-to-end in a virtual lab: **Wazuh SIEM** ingesting Windows (**Sysmon**) and Linux (**auditd**) telemetry, with a **25-rule detection pack authored in Sigma and shipped as Wazuh-native rules — every rule mapped to MITRE ATT&CK** and validated through adversary emulation (Atomic Red Team, Impacket) with screenshot-level evidence for each verified detection. On top of it: an **LLM tier-1 triage assistant behind strict guardrails** — PII redaction before any prompt leaves the runner, no autonomous actions, human review on every output, full prompt/response logging — with impact measured honestly: time-to-triage and hallucination rate against ground truth, not vibes.
+**[AlertMind — AI-Assisted Mini SOC](https://github.com/opandey1/alertmind)** 🛡️ *(capstone — complete)*
+
+A working Security Operations Centre built end-to-end in an isolated lab: Wazuh SIEM ingesting Windows (Sysmon) and Linux (auditd) telemetry, with **25 Sigma detections mapped to 24 custom Wazuh rules plus built-in rule 61138** — ATT&CK-tagged with mapping caveats documented, and all 24 custom rules verified firing against retained screenshots and command output. Alongside it, a **draft-only LLM tier-1 triage assistant**: tested credential classes redacted before prompt construction, no Wazuh write or action path, no response tools, mandatory analyst review, and prompt/response audit logging on every batch run. It runs over a frozen alert corpus and analyst-pasted alerts — live Wazuh integration is documented target state, not a shipped feature.
+
+**The measurement is the point.** Against a frozen 20-alert corpus of 14 controlled attacks plus 6 historical benign false positives, llama3.1-assisted triage was faster on all 14 alerts it dispositioned correctly (11.43 → 8.00 min median) and slower on all 6 it got wrong (+1.68 min paired median). Alert class and correctness coincide in this sample, so that is an association, not an isolated causal effect. Analyst accuracy held at 20/20 in both passes because review caught every wrong assistant disposition — human-in-the-loop worked, and it had a measurable cost. A label-reduced evaluation view then dropped llama3.1's exact technique score from **14/14 to 1/14**, exposing heavy reliance on the rule's own embedded ATT&CK label. All findings re-derivable from committed run logs, timing data and the analysis notebook.
 
 **[Project KAVACH](https://github.com/opandey1/project-kavach)** 🔍
+
 A solo four-week security engagement for a fictional Indian NBFC, fusing **network forensics** (PCAP triage, hypothesis-driven analysis with confirm/refute verdicts, IOC extraction with confidence ratings) with **web application security assessment** (OWASP Top 10 exploitation, code-level remediation, before/after Semgrep SAST baselines) — synthesized into a joint **STRIDE threat model** and a seven-layer **defence-in-depth proposal** with a board-ready executive readout.
 
-**[AI-SOC-Assistant](https://github.com/opandey1/AI-SOC-Assistant)** — An AI-driven threat hunting pipeline using Random Forest, SHAP, and LangGraph to automate SOC ticket generation with explainable outputs. The alert-summarization core now powers AlertMind's assistant.
+**[AI-SOC-Assistant](https://github.com/opandey1/AI-SOC-Assistant)** — An AI-driven threat hunting pipeline using Random Forest, SHAP, and LangGraph to automate SOC ticket generation with explainable outputs. AlertMind's alert-summarization starting point was adapted from this earlier project.
 
 **[SentinelScribe](https://github.com/opandey1/SentinelScribe)** — A three-pass GenAI pipeline that transforms raw cybersecurity course audio transcripts into structured, forensically-accurate Markdown study guides.
 
@@ -48,7 +51,9 @@ A solo four-week security engagement for a fictional Indian NBFC, fusing **netwo
 ![scikit-learn](https://img.shields.io/badge/-scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)
 ![LangChain](https://img.shields.io/badge/-LangChain-1C3C3C?style=flat&logo=langchain&logoColor=white)
 ![LangGraph](https://img.shields.io/badge/-LangGraph-1C3C3C?style=flat)
+![Ollama](https://img.shields.io/badge/-Ollama-000000?style=flat&logo=ollama&logoColor=white)
 ![SHAP](https://img.shields.io/badge/-SHAP-9146FF?style=flat)
+![Streamlit](https://img.shields.io/badge/-Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/-Jupyter-F37626?style=flat&logo=jupyter&logoColor=white)
 
 **Forensics & AppSec**
@@ -81,7 +86,7 @@ A solo four-week security engagement for a fictional Indian NBFC, fusing **netwo
 
 ## 🎓 Education
 
-- **PG Certificate, AI/GenAI Powered Cybersecurity**, IIT Roorkee × Futurense — *in progress (Cohort 1)*
+- **PG Certificate, AI/GenAI Powered Cybersecurity**, IIT Roorkee × Futurense — *Cohort 1*
 - **M.S. Cyber Security Engineering**, University of Southern California — GPA 3.70
 - **B.Tech Information Technology** (Honors), The NorthCap University
 
