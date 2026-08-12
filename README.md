@@ -30,11 +30,11 @@ A solo four-week security engagement for a fictional Indian NBFC, fusing **netwo
 Classifies network connections into five classes - **Normal, DoS, Probe, R2L, and U2R** - instead of returning only a binary anomaly flag.
 
    - **Detection and evidence:** Fuses a Random Forest family classifier with a training-calibrated Isolation Forest signal. Per-connection SHAP evidence shows which observed features support or oppose the verdict.
-    - **Live workflow:** Delayed replay and Kafka-compatible events feed a shared inference runtime and a dark Streamlit console for triage, SHAP analysis, incident tickets, and analyst review.
-    - **Governed GenAI:** Generates evidence-bound tickets through deterministic templates or a guardrailed LangGraph workflow. Supports offline deterministic operation and local Ollama; cloud providers and threat-intelligence lookups are explicit opt-ins.
-    - **Feedback loop:** Stores tickets and append-only analyst reviews in SQLite. Reviewed false positives become weighted retraining examples saved as atomic, versioned model artifacts.
-    - **Honest evaluation:** Achieved 99.88% NSL-KDD holdout accuracy and 74.40% KDDTest+ accuracy; zero-tuning transfer to UNSW-NB15 reached 58.89% accuracy and 16.02% macro F1, quantifying the cross-dataset generalization gap.
-    - **Engineering quality:** Backed by 118 automated tests, Python 3.10-3.12 CI, reproducible evaluation artifacts, and non-root Docker checks.
+   - **Live workflow:** Delayed replay and Kafka-compatible events feed a shared inference runtime and a dark Streamlit console for triage, SHAP analysis, incident tickets, and analyst review.
+   - **Governed GenAI:** Generates evidence-bound tickets through deterministic templates or a guardrailed LangGraph workflow. Supports offline deterministic operation and local Ollama; cloud providers and threat-intelligence lookups are explicit opt-ins.
+   - **Feedback loop:** Stores tickets and append-only analyst reviews in SQLite. Reviewed false positives become weighted retraining examples saved as atomic, versioned model artifacts.
+   - **Honest evaluation:** Achieved 99.88% NSL-KDD holdout accuracy and 74.40% KDDTest+ accuracy; zero-tuning transfer to UNSW-NB15 reached 58.89% accuracy and 16.02% macro F1, quantifying the cross-dataset generalization gap.
+   - **Engineering quality:** Backed by 118 automated tests, Python 3.10-3.12 CI, reproducible evaluation artifacts, and non-root Docker checks.
 
 **[SentinelScribe](https://github.com/opandey1/SentinelScribe)** — A three-pass GenAI pipeline that transforms raw cybersecurity course audio transcripts into structured, forensically-accurate Markdown study guides.
 
