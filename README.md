@@ -25,7 +25,16 @@ A working Security Operations Centre built end-to-end in an isolated lab: Wazuh 
 
 A solo four-week security engagement for a fictional Indian NBFC, fusing **network forensics** (PCAP triage, hypothesis-driven analysis with confirm/refute verdicts, IOC extraction with confidence ratings) with **web application security assessment** (OWASP Top 10 exploitation, code-level remediation, before/after Semgrep SAST baselines) — synthesized into a joint **STRIDE threat model** and a seven-layer **defence-in-depth proposal** with a board-ready executive readout.
 
-**[AI-SOC-Assistant](https://github.com/opandey1/AI-SOC-Assistant)** — An AI-driven threat hunting pipeline using Random Forest, SHAP, and LangGraph to automate SOC ticket generation with explainable outputs. AlertMind's alert-summarization starting point was adapted from this earlier project.
+**[AI-SOC-Assistant](https://github.com/opandey1/AI-SOC-Assistant)** — Explainable, local-first SOC triage platform.
+
+Classifies network connections into five classes - **Normal, DoS, Probe, R2L, and U2R** - instead of returning only a binary anomaly flag.
+
+   - **Detection and evidence:** Fuses a Random Forest family classifier with a training-calibrated Isolation Forest signal. Per-connection SHAP evidence shows which observed features support or oppose the verdict.
+    - **Live workflow:** Delayed replay and Kafka-compatible events feed a shared inference runtime and a dark Streamlit console for triage, SHAP analysis, incident tickets, and analyst review.
+    - **Governed GenAI:** Generates evidence-bound tickets through deterministic templates or a guardrailed LangGraph workflow. Supports offline deterministic operation and local Ollama; cloud providers and threat-intelligence lookups are explicit opt-ins.
+    - **Feedback loop:** Stores tickets and append-only analyst reviews in SQLite. Reviewed false positives become weighted retraining examples saved as atomic, versioned model artifacts.
+    - **Honest evaluation:** Achieved 99.88% NSL-KDD holdout accuracy and 74.40% KDDTest+ accuracy; zero-tuning transfer to UNSW-NB15 reached 58.89% accuracy and 16.02% macro F1, quantifying the cross-dataset generalization gap.
+    - **Engineering quality:** Backed by 118 automated tests, Python 3.10-3.12 CI, reproducible evaluation artifacts, and non-root Docker checks.
 
 **[SentinelScribe](https://github.com/opandey1/SentinelScribe)** — A three-pass GenAI pipeline that transforms raw cybersecurity course audio transcripts into structured, forensically-accurate Markdown study guides.
 
