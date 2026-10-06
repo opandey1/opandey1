@@ -15,20 +15,16 @@ If you're working on detection engineering, AI for security operations, or SOC a
 
 ## 🚀 Featured Projects
 
-**[AlertMind - AI-Assisted Mini SOC](https://github.com/opandey1/alertmind)** 🛡️ *(capstone - complete)*
+**[AlertMind - AI-Assisted Mini SOC](https://github.com/opandey1/alertmind)** 🛡️ *(capstone - complete; post-capstone RBAC and integration work ongoing)*
 
-   - **End-to-end SOC architecture:** Built an isolated Wazuh 4.14.5 lab ingesting Windows/Sysmon and Linux/auditd telemetry, with two operational dashboards, three incident-response playbooks, and verified 90-day retention across 21 managed alert indices.
-   - **Detection engineering:** Authored 25 Sigma detections and implemented 24 as custom Wazuh rules, with Windows service creation mapped to built-in rule 61138; documented ATT&CK-mapping caveats and verified all custom rules through controlled simulations, including Atomic Red Team.
-   - **Detection performance:** Measured a **2.32-second median attack-to-alert latency** and retained command output, screenshots, rule sources, and tuning notes-including false-positive exclusions and known indicator-versus-behavioural coverage gaps.
-   - **Guardrailed AI triage:** Engineered a Python/Streamlit Tier-1 assistant supporting local, hosted, and deterministic mock providers, with tested credential redaction, strict JSON validation, prompt-injection visibility, an independent boundary gate, and auditable runs.
-   - **Constrained by design:** Assistant outputs are draft-only under mandatory analyst review, with **no Wazuh write/action path, no response tools, and no enforcement integration**.
-   - **Measured human impact:** On a frozen 20-alert corpus, all 14 correctly dispositioned alerts were triaged faster, while all six incorrect dispositions were slower (**+1.68 min paired median**); analyst review preserved **20/20 accuracy** while exposing its measurable time cost.
-   - **Evaluation integrity:** A strict label-reduced view collapsed llama3.1:8b's exact ATT&CK score from **14/14 to 1/14**, revealing label copying rather than independent classification; the model also identified **0/6 benign false positives**, supporting a documented no-deploy decision for that use case.
-   - **Reproducible and honestly scoped:** Backed by **67 automated tests**, a hashed corpus, retained audit logs, timing data, manual grounding worksheets, and a re-runnable analysis notebook; live Wazuh-to-assistant integration remains an explicitly documented target state, not a shipped feature.
-
-**[Project KAVACH](https://github.com/opandey1/project-kavach)** 🔍
-
-A solo four-week security engagement for a fictional Indian NBFC, fusing **network forensics** (PCAP triage, hypothesis-driven analysis with confirm/refute verdicts, IOC extraction with confidence ratings) with **web application security assessment** (OWASP Top 10 exploitation, code-level remediation, before/after Semgrep SAST baselines) — synthesized into a joint **STRIDE threat model** and a seven-layer **defence-in-depth proposal** with a board-ready executive readout.
+   - **End-to-end SOC:** Built an isolated Wazuh lab, now upgraded to 4.14.7, ingesting Windows/Sysmon and Linux/auditd telemetry, with two operational dashboards, three incident-response playbooks, and a configured 90-day retention policy verified attached to 21 alert indices.
+   - **Detection engineering:** Authored 25 Sigma detections and implemented 24 custom Wazuh rules, retaining built-in rule 61138 for Windows service creation. Verified custom-rule firing through controlled simulations, including Atomic Red Team, with documented ATT&CK-mapping and coverage limitations.
+   - **Measured detection latency:** Recorded a **2.32-second median attack-to-alert latency** in controlled lab experiments, retaining timestamps, rule sources, screenshots and tuning evidence.
+   - **Guardrailed AI triage:** Built a Python/Streamlit assistant supporting local, hosted and deterministic mock providers, with tested credential redaction, strict JSON validation, prompt-injection indicators, a boundary gate and sanitized audit records. Outputs remain analyst-reviewed drafts, with **no SIEM write or response-action path**.
+   - **Least-privilege access:** Implemented separate analyst/service Indexer identities, agent-001/002 document-level filtering, verified read/write boundaries, and restricted SSH forwarding with pinned TLS verification. Exercised credential/key revocation, rotation and reboot recovery.
+   - **Dashboard security hardening:** Remediated Dashboard-to-Server broker TLS verification and deployed scoped human read-only mapping/UI configuration, supported by startup refusal checks, private backups and clone recovery rehearsal. Final analyst acceptance and human rollback validation remain in progress.
+   - **Evidence-led AI evaluation:** Compared Llama 3.1, Qwen3 and GPT-5.5 on a frozen 20-alert corpus. Label-reduced evaluation exposed Llama’s exact ATT&CK score falling from **14/14 to 1/14**; the single-analyst timed study retained **20/20 final disposition accuracy**, while six incorrect model dispositions incurred a **+1.68-minute paired median review penalty**.
+   - **Reproducible and honestly scoped:** Maintained a **1,452-test regression suite**, CI, hashed inputs, retained run logs and grounding worksheets. The assistant currently consumes frozen or analyst-pasted alerts; **OIDC and live Wazuh ingestion are planned, not shipped**.
 
 **[AI-SOC-Assistant](https://github.com/opandey1/AI-SOC-Assistant)** - Explainable, local-first SOC triage platform.
 
@@ -40,6 +36,10 @@ Classifies network connections into five classes - **Normal, DoS, Probe, R2L, an
    - **Feedback loop:** Stores tickets and append-only analyst reviews in SQLite. Reviewed false positives become weighted retraining examples saved as atomic, versioned model artifacts.
    - **Honest evaluation:** Achieved 99.88% NSL-KDD holdout accuracy and 74.40% KDDTest+ accuracy; zero-tuning transfer to UNSW-NB15 reached 58.89% accuracy and 16.02% macro F1, quantifying the cross-dataset generalization gap.
    - **Engineering quality:** Backed by 118 automated tests, Python 3.10-3.12 CI, reproducible evaluation artifacts, and non-root Docker checks.
+
+**[Project KAVACH](https://github.com/opandey1/project-kavach)** 🔍
+
+A solo four-week security engagement for a fictional Indian NBFC, fusing **network forensics** (PCAP triage, hypothesis-driven analysis with confirm/refute verdicts, IOC extraction with confidence ratings) with **web application security assessment** (OWASP Top 10 exploitation, code-level remediation, before/after Semgrep SAST baselines) — synthesized into a joint **STRIDE threat model** and a seven-layer **defence-in-depth proposal** with a board-ready executive readout.
 
 **[SentinelScribe](https://github.com/opandey1/SentinelScribe)** - A three-pass GenAI pipeline that transforms raw cybersecurity course audio transcripts into structured, forensically-accurate Markdown study guides.
 
