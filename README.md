@@ -26,16 +26,16 @@ If you're working on detection engineering, AI for security operations, or SOC a
    - **Evidence-led AI evaluation:** Compared Llama 3.1, Qwen3 and GPT-5.5 on a frozen 20-alert corpus. Label-reduced evaluation exposed Llama’s exact ATT&CK score falling from **14/14 to 1/14**; the single-analyst timed study retained **20/20 final disposition accuracy**, while six incorrect model dispositions incurred a **+1.68-minute paired median review penalty**.
    - **Reproducible and honestly scoped:** Maintained a **1,452-test regression suite**, CI, hashed inputs, retained run logs and grounding worksheets. The assistant currently consumes frozen or analyst-pasted alerts; **OIDC and live Wazuh ingestion are planned, not shipped**.
 
-**[AI-SOC-Assistant](https://github.com/opandey1/AI-SOC-Assistant)** - Explainable, local-first SOC triage platform.
+**[AI-SOC-Assistant](https://github.com/opandey1/AI-SOC-Assistant)** - Explainable, local-first SOC triage platform that turns network telemetry into family-level verdicts, grounded evidence, and analyst-ready incident tickets.
 
-Classifies network connections into five classes - **Normal, DoS, Probe, R2L, and U2R** - instead of returning only a binary anomaly flag.
-
-   - **Detection and evidence:** Fuses a Random Forest family classifier with a training-calibrated Isolation Forest signal. Per-connection SHAP evidence shows which observed features support or oppose the verdict.
-   - **Live workflow:** Delayed replay and Kafka-compatible events feed a shared inference runtime and a dark Streamlit console for triage, SHAP analysis, incident tickets, and analyst review.
-   - **Governed GenAI:** Generates evidence-bound tickets through deterministic templates or a guardrailed LangGraph workflow. Supports offline deterministic operation and local Ollama; cloud providers and threat-intelligence lookups are explicit opt-ins.
-   - **Feedback loop:** Stores tickets and append-only analyst reviews in SQLite. Reviewed false positives become weighted retraining examples saved as atomic, versioned model artifacts.
-   - **Honest evaluation:** Achieved 99.88% NSL-KDD holdout accuracy and 74.40% KDDTest+ accuracy; zero-tuning transfer to UNSW-NB15 reached 58.89% accuracy and 16.02% macro F1, quantifying the cross-dataset generalization gap.
-   - **Engineering quality:** Backed by 118 automated tests, Python 3.10-3.12 CI, reproducible evaluation artifacts, and non-root Docker checks.
+   - **Multi-class detection:** Classifies connections as **Normal, DoS, Probe, R2L, or U2R**, rather than returning only a binary anomaly flag.
+   - **Dual-model triage:** Fuses a Random Forest family classifier with a training-calibrated Isolation Forest risk signal to produce a stable verdict.
+   - **Explainable evidence:** Uses per-connection SHAP values and real, unscaled feature observations to show which signals support or oppose the predicted class.
+   - **Operational workflow:** Delayed replay and Kafka-compatible ingestion share one inference runtime with a dark Streamlit console for triage, SHAP analysis, ticket review, and model operations.
+   - **Governed GenAI:** Produces evidence-bound tickets with containment guidance, MITRE ATT&CK context, and Splunk SPL through deterministic templates or a validated LangGraph workflow. Template mode is offline-capable, Ollama supports local inference, and cloud or threat-intelligence calls require explicit opt-in.
+   - **Analyst feedback:** Stores tickets and append-only reviews in SQLite. Confirmed false positives become explicitly weighted Random Forest retraining examples written to an atomic, version-stamped local artifact.
+   - **Honest evaluation:** Reached **99.88%** NSL-KDD holdout accuracy and **74.40%** on unseen KDDTest+ attack variants. Zero-tuning UNSW-NB15 transfer reached **58.89% accuracy** and **16.02% macro F1**, documenting the cross-dataset generalization gap rather than hiding it.
+   - **Engineering quality:** Backed by **150 automated tests**, a 70% coverage gate, Python 3.10-3.12 CI, formatting and lint checks, dependency-advisory reporting, reproducible evaluation artifacts, and non-root Docker validation.
 
 **[Project KAVACH](https://github.com/opandey1/project-kavach)** 🔍
 
